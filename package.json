@@ -1,0 +1,30 @@
+{
+  "name": "generator-gulp-quickstarter",
+  "version": "1.0.0",
+  "description": "A Yeoman Front-End Boilerplate Generator",
+  "files": [
+    "app"
+  ],
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/slovisi/generator-quickstarter.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Sylvain Lovisi",
+    "email": "sylvain.lovisi@gmail.com",
+    "url": "https://github.com/slovisi"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "mkdirp": "^0.5.1",
+    "underscore.string": "^3.2.2",
+    "wiredep": "^2.2.2",
+    "yeoman-generator": "^0.20.3",
+    "yosay": "^1.0.5"
+  }
+}

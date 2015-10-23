@@ -1,0 +1,4 @@
+{
+  "sitename": "<%= siteName %>",
+  "lang": "<%= siteLanguage %>"
+}
