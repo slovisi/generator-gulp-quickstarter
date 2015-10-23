@@ -2,6 +2,11 @@
   "name": "generator-gulp-quickstarter",
   "version": "1.0.0",
   "description": "A Yeoman Front-End Boilerplate Generator",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "homepage": "https://github.com/slovisi/generator-gulp-quickstarter",
+  "bugs": "https://github.com/slovisi/generator-gulp-quickstarter/issues",
   "files": [
     "app"
   ],
