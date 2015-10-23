@@ -8,7 +8,7 @@
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/slovisi/generator-quickstarter.git"
+    "url": "git://github.com/slovisi/generator-gulp-quickstarter.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
