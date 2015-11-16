@@ -1,6 +1,6 @@
 {
   "name": "generator-gulp-quickstarter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Yeoman Front-End Boilerplate Generator",
   "keywords": [
     "yeoman-generator"

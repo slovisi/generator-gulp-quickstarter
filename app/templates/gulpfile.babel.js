@@ -131,6 +131,12 @@ gulp.task('fonts', () => {
     .pipe(gulp.dest('dist/font'));
 });
 
+gulp.task('customJs', () => {
+  return gulp.src([
+    'app/src/custom/*.*'
+  ]).pipe(gulp.dest('dist/js'));
+});
+
 gulp.task('extras', () => {
   return gulp.src([
     'app/*.*'
@@ -141,7 +147,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['scripts', 'html', 'images', 'fonts'], () => {
+gulp.task('serve', ['scripts','customJs','html', 'images', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -154,7 +160,7 @@ gulp.task('serve', ['scripts', 'html', 'images', 'fonts'], () => {
   });
 
   gulp.watch(['app/img/**/*'], ['images']);
-  gulp.watch(['app/src/**/*.js'], ['lint', 'scripts']);
+  gulp.watch(['app/src/**/*.js'], ['lint', 'scripts', 'customJs']);
   gulp.watch(['app/**/*.hbs'], ['html']);
   gulp.watch('app/scss/**/*.scss', ['css']);
   gulp.watch('app/font/**/*', ['fonts']);
@@ -216,11 +222,11 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'scripts', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['lint', 'scripts', 'customJs', 'html', 'images', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
-gulp.task('optimize', ['lint', 'scripts', 'htmloptimize', 'images', 'fonts', 'extras'], () => {
+gulp.task('optimize', ['lint', 'scripts', 'customJs', 'htmloptimize', 'images', 'fonts', 'extras'], () => {
     return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
