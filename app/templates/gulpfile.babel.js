@@ -1,6 +1,6 @@
 // generated on 2015-10-23 using generator-quickstarter2 1.0.0
 import gulp from 'gulp';
-import assemble from 'assemble';
+import panini from 'panini';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import del from 'del';
@@ -61,19 +61,23 @@ function lint(files, options) {
 gulp.task('lint', lint('app/src/**/*.js'));
 gulp.task('lint:test', lint('test/spec/**/*.js'));
 
-gulp.task('assemble', () => {
-    assemble.layouts(['app/layouts/**/*.hbs']);
-    assemble.partials('app/partials/**/*.hbs');
-    assemble.data('app/datas/*.{json,yml}');
-    assemble.pages('app/pages/*.hbs');
-    assemble.option({
-      layoutdir: 'app/layouts',
-      layout: 'main'
-    });
-  assemble.src('app/pages/*.hbs')
-    .pipe($.extname())
-    .pipe(assemble.dest('dist/'));
+gulp.task('panini', function() {
+  gulp.src('app/pages/**/*.hbs')
+    .pipe(panini({
+      root: 'app/pages',
+      layouts: 'app/layouts/',
+      partials: 'app/partials/',
+      helpers: 'app/helpers/',
+      data: 'app/datas'
+    })).pipe($.extname())
+    .pipe(gulp.dest('dist/'));
 });
+
+
+gulp.task('panini:reset', function() {
+  panini.refresh();
+  gulp.run('html');
+})
 
 <% if (includeModernizr) { %>
 gulp.task('modernizr', () => {
@@ -83,7 +87,7 @@ gulp.task('modernizr', () => {
 });
 <% } %>
 
-gulp.task('html', ['css','assemble'], () => {
+gulp.task('html', ['css','panini'], () => {
   const assets = $.useref.assets({searchPath: ['dist', '.']});
 
   return gulp.src('dist/*.html')
@@ -93,7 +97,7 @@ gulp.task('html', ['css','assemble'], () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('htmloptimize', ['cssprod','assemble'], () => {
+gulp.task('htmloptimize', ['cssprod','panini'], () => {
   const assets = $.useref.assets({searchPath: ['dist', '.']});
 
   return gulp.src('dist/*.html')
@@ -156,6 +160,8 @@ gulp.task('serve', ['scripts','customJs','html', 'images', 'fonts'], () => {
   gulp.watch(['app/img/**/*'], ['images']);
   gulp.watch(['app/src/**/*.js'], ['lint', 'scripts', 'customJs']);
   gulp.watch(['app/**/*.hbs'], ['html']);
+  gulp.watch(['app/pages/**/*.hbs'], ['html']);
+  gulp.watch(['app/{layouts,partials,helpers,data}/**/*'], ['panini:reset']);
   gulp.watch('app/scss/**/*.scss', ['css']);
   gulp.watch('app/font/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep']);

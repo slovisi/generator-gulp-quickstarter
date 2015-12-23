@@ -4,10 +4,10 @@ This is my first attempt at a generator, and a way for me to familiarize with no
 
 ## Features
 
-* Built-in preview server with LiveReload
+* Built-in preview server with BrowserSync
 * Automatic compilation of SCSS with Compass
 * Image Optimization
-* Assemble.io templating engine
+* Zurb Panini flat file generator using Handlebars
 
 ## Getting Started
 
@@ -26,16 +26,16 @@ This is my first attempt at a generator, and a way for me to familiarize with no
 - You can add a page in the app/pages/ directory, config the page this block :
 
 <pre><code>---
-layout: main
-page:
+layout: default
+current:
    name: Home
 ---</code></pre>
 
 - Example : you want to add a specific javascript files for your homepage, named home.js, you just have to create home.js file in the app/src/custom/ directory and configure the page this way :
 
 <pre><code>---
-layout: main
-page:
+layout: default
+current:
    name: Home
    script:
        - home
@@ -44,8 +44,8 @@ page:
 - If you really need it you can add several specific javascript files :
 
 <pre><code>---
-layout: main
-page:
+layout: default
+current:
    name: Home
    script:
        - file1
@@ -53,10 +53,19 @@ page:
        - file3
 ---</code></pre>
 
-- Take a look at app/layout/main.hbs to see how to call partials
+- Take a look at app/layout/default.hbs to see how to call partials
 
-- Refer to [the documentation of Assemble](http://assemble.io/docs/) for a better understanding of the use of variables, partials etc...
+- To use datas from the datas/ folder
+<pre><code>---
+{{filename.variablename}}
+---</code></pre>
 
+- To call a partial from partials/ folder
+<pre><code>---
+{{> partialname}}
+---</code></pre>
+
+- You can add Handlebars helpers by creating a helpers/ forlder in app/. Refer to Panini documentation on [how to declare helpers](https://github.com/zurb/panini#helpers)
 
 ## License
 

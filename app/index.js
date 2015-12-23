@@ -135,6 +135,9 @@ module.exports = generators.Base.extend({
                 this.templatePath('editorconfig'),
                 this.destinationPath('.editorconfig')
             );
+            this.fs.copy(
+                this.templatePath('_eslintignore'),
+                this.destinationPath('.eslintignore'));
         },
         h5bp: function () {
             this.fs.copy(
@@ -218,8 +221,8 @@ module.exports = generators.Base.extend({
                 this.templatePath('font'),
                 this.destinationPath('app/font/'));
             this.fs.copyTpl(
-                this.templatePath('layouts/main.hbs'),
-                this.destinationPath('app/layouts/main.hbs'),
+                this.templatePath('layouts/default.hbs'),
+                this.destinationPath('app/layouts/default.hbs'),
                 {
                   includeModernizr: this.includeModernizr,
                   includeJQuery: this.includeJQuery
